@@ -1,0 +1,1 @@
+insert into account (id, name, balance) values (1, 'Sunny', 0), (2, 'Andy', 30);
