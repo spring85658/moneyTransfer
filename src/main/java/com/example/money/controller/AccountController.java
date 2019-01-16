@@ -34,6 +34,7 @@ public class AccountController {
     })
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<? extends BaseResponse> getBalance(@ApiParam(value = "Account Id", required = true) @PathVariable long id) {
+        logger.info("Get Balance, account id {}", id);
         BigDecimal balance = null;
         try {
             balance = accountService.getAccountBalanceById(id);

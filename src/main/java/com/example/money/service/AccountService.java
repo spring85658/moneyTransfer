@@ -21,6 +21,7 @@ public class AccountService {
     public BigDecimal getAccountBalanceById(long id) throws AccountNotFoundException {
         Account account = accountRepository.findById(id);
         if (account != null){
+            logger.info("Account {} balance {} ",id, account.getBalance());
             return account.getBalance();
         }else{
             logger.error("Account id {} not found", id);

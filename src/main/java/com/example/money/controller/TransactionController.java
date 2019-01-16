@@ -8,6 +8,8 @@ import com.example.money.service.TransactionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +28,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping("transaction")
 public class TransactionController {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private TransactionService transactionService;
 
@@ -37,6 +41,7 @@ public class TransactionController {
     })
     @PostMapping()
     public ResponseEntity<? extends BaseResponse> createTransaction(@RequestBody TransactionRequest transactionRequest){
+        logger.info("Transfer money {}", transactionRequest);
         try {
             Transaction transaction = transactionService.createTransaction(transactionRequest.getFromId(), transactionRequest.getToId(), transactionRequest.getAmount());
         } catch (AccountNotFoundException e) {
